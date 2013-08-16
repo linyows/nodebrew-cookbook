@@ -16,7 +16,7 @@ Vagrant.configure('2') do |config|
           { :version => 'v0.11.5', :binary => true },
           { :version => 'v0.10.15', :binary => true }
         ],
-        :using => 'v0.10.15',
+        :use => 'v0.10.15',
         :npm => {
           'v0.11.5' => [
             'underscore',

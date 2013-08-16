@@ -35,6 +35,6 @@ Array(node[:nodebrew][:npm]).each do |node_ver, npms|
   end
 end
 
-nodebrew_use "use #{node[:nodebrew][:using]}" do
-  node_version node[:nodebrew][:using]
-end if node[:nodebrew][:using]
+nodebrew_use "use #{node[:nodebrew][:use]}" do
+  node_version node[:nodebrew][:use]
+end if node[:nodebrew][:use]
