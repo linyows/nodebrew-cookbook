@@ -1,0 +1,19 @@
+# Cookbook Name:: nodebrew
+# Resource:: node
+
+actions :install
+default_action :install
+
+def initialize(*args)
+  super
+  @action = :install
+end
+
+attribute :version,
+  :kind_of => String,
+  :name_attribute => true,
+  :regex => /^v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}$/,
+  :required => true
+attribute :binary,
+  :kind_of => [TrueClass, FalseClass],
+  :default => false
