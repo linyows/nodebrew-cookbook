@@ -40,6 +40,7 @@ Requirements
 
 - Chef >= 11.4
 - Platform: ubuntu, debian, fedora, centos and redhat
+- Cookbook: build-essential, git and apt
 
 Installation
 ------------
