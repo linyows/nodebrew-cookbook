@@ -1,7 +1,7 @@
 # Cookbook Name:: nodebrew
 # Resource:: node
 
-actions :install
+actions :install, :uninstall
 default_action :install
 
 def initialize(*args)

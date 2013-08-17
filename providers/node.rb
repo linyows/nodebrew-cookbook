@@ -26,3 +26,21 @@ action :install do
     new_resource.updated_by_last_action(true)
   end
 end
+
+action :uninstall do
+  case
+  when !node_installed?(new_resource.version)
+    Chef::Log.info "#{new_resource} is not installed - nothing to do"
+  else
+    command = "nodebrew uninstall #{new_resource.version}"
+
+    nodebrew_script command do
+      action :nothing
+      code command
+    end.run_action(:run)
+
+    Chef::Log.info "#{new_resource} was successfully uninstall"
+
+    new_resource.updated_by_last_action(true)
+  end
+end
