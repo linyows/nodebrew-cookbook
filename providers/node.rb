@@ -5,8 +5,6 @@ include Chef::Mixin::Nodebrew
 
 action :install do
   case
-  when nodebrew_missing?
-    Chef::Log.warn 'Nodebrew is missing. Action will be skipped.'
   when node_installed?(new_resource.version)
     Chef::Log.info "#{new_resource} is already installed - nothing to do"
   else

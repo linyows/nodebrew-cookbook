@@ -1,35 +1,44 @@
 class Chef
   module Mixin
     module Nodebrew
-      def load_current_resource
-        super
-        @nodebrew_root
-      end
+      include Chef::Mixin::ShellOut
 
-      def nodebrew_missing?
-        !which('nodebrew')
-      end
+      def nodebrew_cmd(cmd, options = {})
+        unless nodebrew_installed?
+          Chef::Log.error <<-MSG.gsub(/\s{2,}/, '').strip
+            nodebrew is not yet installed. Unable to run nodebrew_command: `#{cmd}`.
+            Are you trying to use `nodebrew_cmd` at the top level of your recipe?
+            This is known to cause this error
+          MSG
+          raise "nodebrew not installed. Can't run nodebrew_cmd"
+        end
 
-      def node_installed?(version)
-        ::File.directory? ::File.join(nodebrew_root, 'src', version)
+        default_options = {
+          :user => node[:nodebrew][:user],
+          :cwd => nodebrew_root,
+          :env => { 'NODEBREW_ROOT' => nodebrew_root },
+          :timeout => 3600
+        }
+
+        shell_out cmd, Chef::Mixin::DeepMerge.deep_merge!(options, default_options)
       end
 
       def nodebrew_root
-        return @nodebrew_root if @nodebrew_root
-        path = which('nodebrew')
-        return unless path
-        @nodebrew_root = path.gsub(%r(/current/bin/nodebrew), '')
+        node[:nodebrew][:root]
       end
 
-      def which(cmd)
-        exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
-        ENV['PATH'].split(::File::PATH_SEPARATOR).each do |path|
-          exts.each do |ext|
-            exe = "#{path}/#{cmd}#{ext}"
-            return exe if ::File.executable? exe
-          end
-        end
-        nil
+      def nodebrew_binary_path
+        "#{nodebrew_root}/current/bin/nodebrew"
+      end
+
+      def nodebrew_installed?
+        out = shell_out("ls #{nodebrew_binary_path}")
+        out.exitstatus.zero?
+      end
+
+      def node_installed?(version)
+        out = nodebrew_cmd("nodebrew ls | grep #{version}")
+        out.exitstatus.zero?
       end
     end
   end
