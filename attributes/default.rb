@@ -6,3 +6,5 @@ default[:nodebrew][:ref] = 'master'
 default[:nodebrew][:upgrade] = true
 default[:nodebrew][:root] = '/usr/local/lib/nodebrew'
 default[:nodebrew][:user] = 'root'
+default[:nodebrew][:nodes] = []
+default[:nodebrew][:npm] = {}
