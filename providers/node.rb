@@ -6,7 +6,8 @@ include Chef::Mixin::Nodebrew
 action :install do
   case
   when node_installed?(new_resource.version)
-    Chef::Log.info "#{new_resource} is already installed - nothing to do"
+    message_when_the_installed(new_resource)
+
   else
     Chef::Log.info "Building #{new_resource}, this could take a while..."
     install_start = Time.now
@@ -30,7 +31,8 @@ end
 action :uninstall do
   case
   when !node_installed?(new_resource.version)
-    Chef::Log.info "#{new_resource} is not installed - nothing to do"
+    message_when_the_not_installed(new_resource)
+
   else
     command = "nodebrew uninstall #{new_resource.version}"
 

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Chef
   module Mixin
     module Nodebrew
@@ -48,6 +50,28 @@ class Chef
       def node_installed?(version)
         out = nodebrew_cmd("nodebrew ls | grep #{version}")
         out.exitstatus.zero?
+      end
+
+      def package_installed?(package, path = nil)
+        cmd = if path
+                "cd #{path} && npm ls 2> /dev/null | grep '#{npm_grep_prefix} #{package}'"
+              else
+                "npm -g ls 2> /dev/null | grep '#{npm_grep_prefix} #{package}'"
+              end
+        out = nodebrew_cmd(cmd)
+        out.exitstatus.zero?
+      end
+
+      def npm_grep_prefix
+        '^[├└]─[─┬]'
+      end
+
+      def message_when_the_installed(resource)
+        Chef::Log.info "#{new_resource} is already installed - nothing to do"
+      end
+
+      def message_when_the_not_installed(resource)
+        Chef::Log.info "#{resource} is not installed - nothing to do"
       end
     end
   end
