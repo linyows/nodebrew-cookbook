@@ -1,7 +1,7 @@
 Nodebrew Cookbook
 =================
 
-Installs and manages your versions of Node.js in Chef with [nodebrew][nodebrew]
+Installs and manages your versions of node.js in chef with [nodebrew][nodebrew]
 
 Usage
 -----
