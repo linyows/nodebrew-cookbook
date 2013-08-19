@@ -4,16 +4,10 @@
 include Chef::Mixin::Nodebrew
 
 action :run do
-  command = <<-CMD.strip.gsub(/^ {4}/, '')
-    export NODEBREW_ROOT="#{nodebrew_root}"
-    export PATH="${NODEBREW_ROOT}/current/bin:$PATH"
-    #{new_resource.code}
-  CMD
-
   script new_resource.name do
     action :nothing
     interpreter 'bash'
-    code command
+    code add_nodebrew_path(new_resource.code)
     creates new_resource.creates if new_resource.creates
     cwd new_resource.cwd if new_resource.cwd
     environment new_resource.environment if new_resource.environment

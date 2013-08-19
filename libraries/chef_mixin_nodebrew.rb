@@ -13,14 +13,23 @@ class Chef
           raise "nodebrew not installed. Can't run nodebrew_cmd"
         end
 
-        default_options = {
+        merged_options = Chef::Mixin::DeepMerge.deep_merge!(options, {
           :user => node[:nodebrew][:user],
           :cwd => nodebrew_root,
           :env => { 'NODEBREW_ROOT' => nodebrew_root },
           :timeout => 3600
-        }
+        })
 
-        shell_out cmd, Chef::Mixin::DeepMerge.deep_merge!(options, default_options)
+        shell_out(add_nodebrew_path(cmd), merged_options)
+      end
+
+      def add_nodebrew_path(cmd)
+        command = <<-CMD.strip.gsub(/^ {4}/, '')
+          export NODEBREW_ROOT="#{nodebrew_root}"
+          export PATH="${NODEBREW_ROOT}/current/bin:$PATH"
+          #{cmd}
+        CMD
+        command
       end
 
       def nodebrew_root
