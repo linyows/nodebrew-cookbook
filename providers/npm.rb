@@ -10,9 +10,10 @@ action :install do
   json = new_resource.package_json
   node_ver = new_resource.node_version
 
-  nodebrew_use "use #{node_ver} for #{pkg} installation" do
-    node_version new_resource.node_version
-  end if node_ver
+  nodebrew_script "use #{node_ver} for #{pkg} installation" do
+    action :nothing
+    code "nodebrew use #{new_resource.node_version}"
+  end.run_action(:run) if node_ver
 
   case
   when !pkg
@@ -51,9 +52,10 @@ action :uninstall do
   path = new_resource.path
   node_ver = new_resource.node_version
 
-  nodebrew_use "use #{node_ver} for #{pkg} uninstallation" do
-    node_version new_resource.node_version
-  end if node_ver
+  nodebrew_script "use #{node_ver} for #{pkg} uninstallation" do
+    action :nothing
+    code "nodebrew use #{new_resource.node_version}"
+  end.run_action(:run) if node_ver
 
   case
   when !pkg
