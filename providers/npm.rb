@@ -43,6 +43,8 @@ action :install do
       code "npm -g install #{pkg}"
     end.run_action(:run)
   end
+
+  new_resource.updated_by_last_action(true)
 end
 
 action :uninstall do
@@ -76,4 +78,6 @@ action :uninstall do
       code "npm -g uninstall #{pkg}"
     end.run_action(:run)
   end
+
+  new_resource.updated_by_last_action(true)
 end
