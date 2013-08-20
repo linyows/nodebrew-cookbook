@@ -6,7 +6,7 @@ description      'Installs and manages your versions of node.js in chef with nod
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.2'
 
-recipe "nodebrew", "Installs and configures nodebrew"
+recipe 'nodebrew', 'Installs and configures nodebrew'
 
 %w(centos redhat fedora ubuntu debian).each { |os| supports os }
 %w(apt git build-essential).each { |cookbook| depends cookbook }
