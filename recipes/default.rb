@@ -19,7 +19,7 @@ end
 Array(node[:nodebrew][:npm]).each do |node_ver, npms|
   Array(npms).each do |npm|
     if npm.is_a?(Hash)
-      nodebrew_npm "#{npm[:name]} on #{node_ver}" do
+      nodebrew_npm "#{npm[:name]} on node@#{node_ver}" do
         package npm[:name]
         node_version node_ver
         %w(version action).each do |attr|
@@ -27,7 +27,7 @@ Array(node[:nodebrew][:npm]).each do |node_ver, npms|
         end
       end
     else
-      nodebrew_npm "#{npm} on #{node_ver}" do
+      nodebrew_npm "#{npm} on node@#{node_ver}" do
         package npm
         node_version node_ver
       end
