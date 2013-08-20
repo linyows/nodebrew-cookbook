@@ -47,7 +47,6 @@ end
 
 action :uninstall do
   pkg = new_resource.package
-  pkg << "@#{new_resource.version}" if new_resource.version
   path = new_resource.path
   node_ver = new_resource.node_version
 
