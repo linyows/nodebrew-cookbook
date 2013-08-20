@@ -1,6 +1,8 @@
 Nodebrew Cookbook
 =================
 
+[![Build Status](https://secure.travis-ci.org/linyows/nodebrew-cookbook.png)][travis]
+
 Installs and manages your versions of node.js in chef with [nodebrew][nodebrew]
 
 Usage
@@ -209,5 +211,6 @@ MIT License
 - [linyows][linyows]
 
 [nodebrew]: https://github.com/hokaccha/nodebrew
+[travis]: http://travis-ci.org/linyows/nodebrew-cookbook
 [librarian]: https://github.com/applicationsonline/librarian#readme
 [linyows]: https://github.com/linyows
