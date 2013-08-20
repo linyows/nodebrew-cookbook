@@ -11,7 +11,5 @@ describe 'nodebrew::default' do
     chef_run
   }
 
-  it 'does something' do
-    expect(chef_run).to install_package 'git'
-  end
+  it { expect(chef_run).to install_package 'git' }
 end
