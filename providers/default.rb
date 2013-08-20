@@ -19,7 +19,7 @@ action :install do
     end
   end
 
-  execute 'setup_nodebrew' do
+  execute "setup_nodebrew_#{new_resource.name}" do
     cwd src_path
     command 'perl nodebrew setup'
     environment 'NODEBREW_ROOT' => new_resource.root
