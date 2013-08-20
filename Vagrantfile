@@ -13,16 +13,16 @@ Vagrant.configure('2') do |config|
     chef.json = {
       :nodebrew => {
         :nodes => [
-          { :version => 'v0.11.5', :binary => true },
-          { :version => 'v0.10.15', :binary => true }
+          { :version => '0.11.5', :binary => true },
+          { :version => '0.10.15', :binary => true }
         ],
         :use => 'v0.10.15',
         :npm => {
-          'v0.11.5' => [
+          '0.11.5' => [
             'underscore',
             'coffee-script'
           ],
-          'v0.10.15' => [
+          '0.10.15' => [
             'async@0.2.9',
             { :name => 'bower', :version => '1.1.2', :action => 'install' }
           ]
