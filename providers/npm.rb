@@ -24,21 +24,21 @@ action :install do
     message_when_the_installed(new_resource)
 
   when json && path
-    nodebrew_script "install #{new_resource.name} from package.json_at #{path} by npm" do
+    nodebrew_script "install #{pkg} from package.json_at #{path} by npm" do
       action :nothing
       cwd path
       code 'npm install'
     end.run_action(:run)
 
   when path
-    nodebrew_script "install #{new_resource.name} into #{path} by npm" do
+    nodebrew_script "install #{pkg} into #{path} by npm" do
       action :nothing
       cwd path
       code "npm install #{pkg}"
     end.run_action(:run)
 
   else
-    nodebrew_script "install #{new_resource.name} by npm" do
+    nodebrew_script "install #{pkg} by npm" do
       action :nothing
       cwd path
       code "npm -g install #{pkg}"
@@ -66,14 +66,14 @@ action :uninstall do
     message_when_the_not_installed(new_resource)
 
   when pkg && path
-    nodebrew_script "uninstall #{new_resource.name} from #{path} by npm" do
+    nodebrew_script "uninstall #{pkg} from #{path} by npm" do
       action :nothing
       cwd path
       code "npm uninstall #{pkg}"
     end.run_action(:run)
 
   else
-    nodebrew_script "uninstall #{new_resource.name} by npm" do
+    nodebrew_script "uninstall #{pkg} by npm" do
       action :nothing
       cwd path
       code "npm -g uninstall #{pkg}"
