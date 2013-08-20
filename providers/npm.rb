@@ -40,7 +40,6 @@ action :install do
   else
     nodebrew_script "install #{pkg} by npm" do
       action :nothing
-      cwd path
       code "npm -g install #{pkg}"
     end.run_action(:run)
   end
@@ -65,7 +64,7 @@ action :uninstall do
   when !package_installed?(pkg, path)
     message_when_the_not_installed(new_resource)
 
-  when pkg && path
+  when path
     nodebrew_script "uninstall #{pkg} from #{path} by npm" do
       action :nothing
       cwd path
@@ -75,7 +74,6 @@ action :uninstall do
   else
     nodebrew_script "uninstall #{pkg} by npm" do
       action :nothing
-      cwd path
       code "npm -g uninstall #{pkg}"
     end.run_action(:run)
   end
