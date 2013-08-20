@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class Chef
   module Mixin
     module Nodebrew
@@ -54,16 +52,12 @@ class Chef
 
       def package_installed?(package, path = nil)
         cmd = if path
-                "cd #{path} && npm ls 2> /dev/null | grep '#{npm_grep_prefix} #{package}'"
+                "cd #{path} && npm ls --depth=0 2> /dev/null | grep '#{package}'"
               else
-                "npm -g ls 2> /dev/null | grep '#{npm_grep_prefix} #{package}'"
+                "npm ls -g --depth=0 2> /dev/null | grep '#{package}'"
               end
         out = nodebrew_cmd(cmd)
         out.exitstatus.zero?
-      end
-
-      def npm_grep_prefix
-        '^[├└]─[─┬]'
       end
 
       def message_when_the_installed(resource)
