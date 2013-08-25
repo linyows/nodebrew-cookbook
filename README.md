@@ -42,7 +42,7 @@ Requirements
 
 - Chef >= 11.4
 - Platform: ubuntu, debian, fedora, centos and redhat
-- Cookbook: build-essential, git and apt
+- Cookbook: build-essential and git
 
 Installation
 ------------
@@ -69,6 +69,8 @@ cookbook 'nodebrew', :git => 'git://github.com/$repo.git', :ref => '$latest_rele
 END_OF_CHEFFILE
 librarian-chef install
 ```
+
+why-run support.
 
 Attributes
 ----------
