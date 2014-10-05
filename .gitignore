@@ -19,3 +19,4 @@ tmp
 .rvmrc
 .rbenv-version
 .ruby-version
+/Cheffile.lock
