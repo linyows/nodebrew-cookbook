@@ -2,29 +2,35 @@
 # vi: set ft=ruby :
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'Ubuntu_12.04-Chef_11.4.4'
-  config.vm.box_url = 'http://goo.gl/np92o'
-  config.vm.hostname = 'nodebrew'
-  config.vm.network :private_network, ip: '192.168.33.33'
+  config.vm.define :centos do |centos|
+    centos.vm.box = 'CentOS_6.4-Chef_11.4.4'
+    centos.vm.box_url = 'http://goo.gl/GZqvsF'
+    centos.vm.hostname = 'centos'
+  end
+
+  config.vm.define :ubuntu do |ubuntu|
+    ubuntu.vm.box = 'Ubuntu_12.04-Chef_11.4.4'
+    ubuntu.vm.box_url = 'http://goo.gl/np92o'
+    ubuntu.vm.hostname = 'ubuntu'
+  end
 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = %w(cookbooks site-cookbooks)
+    chef.cookbooks_path = %w(../ vendor/cookbooks)
     chef.add_recipe 'nodebrew'
     chef.json = {
       :nodebrew => {
         :nodes => [
-          { :version => '0.11.5', :binary => true },
-          { :version => '0.10.15', :binary => true }
+          { :version => 'latest', :binary => true },
         ],
-        :use => '0.10.15',
+        :use => 'latest',
         :npm => {
-          '0.11.5' => [
-            'underscore',
-            'coffee-script'
-          ],
-          '0.10.15' => [
-            'async@0.2.9',
-            { :name => 'bower', :version => '1.1.2', :action => 'install' }
+          'latest' => [
+            'underscore@latest',
+            'coffee-script',
+            {
+              :name => 'bower',
+              :action => 'install'
+            }
           ]
         }
       }
