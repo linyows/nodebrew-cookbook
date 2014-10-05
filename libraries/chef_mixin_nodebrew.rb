@@ -14,7 +14,7 @@ class Chef
         end
 
         merged_options = Chef::Mixin::DeepMerge.deep_merge!(options, {
-          :user => node[:nodebrew][:user],
+          :user => node['nodebrew']['user'],
           :cwd => nodebrew_root,
           :env => { 'NODEBREW_ROOT' => nodebrew_root },
           :timeout => 3600
@@ -33,7 +33,7 @@ class Chef
       end
 
       def nodebrew_root
-        node[:nodebrew][:root]
+        node['nodebrew']['root']
       end
 
       def nodebrew_binary_path
