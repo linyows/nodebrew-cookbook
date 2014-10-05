@@ -67,9 +67,9 @@ class Chef
 
       def package_installed?(package, path = nil)
         cmd = if path
-                "cd #{path} && npm ls --depth=0 2> /dev/null | grep '#{package}'"
+                "cd #{path} && npm ls --depth=0 #{package} 2> /dev/null"
               else
-                "npm ls -g --depth=0 2> /dev/null | grep '#{package}'"
+                "npm ls -g --depth=0 #{package} 2> /dev/null"
               end
         out = nodebrew_cmd(cmd)
         out.exitstatus.zero?
