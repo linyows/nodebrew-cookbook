@@ -46,7 +46,22 @@ class Chef
       end
 
       def node_installed?(version)
-        out = nodebrew_cmd("nodebrew ls | grep #{version}")
+        unless version == 'latest'
+          out = nodebrew_cmd("nodebrew ls | grep #{version}")
+          return out.exitstatus.zero?
+        end
+
+        out = nodebrew_cmd('nodebrew ls-remote | tail -n 1')
+        last_line = out.stdout
+        latest_version = last_line.split(' ').last
+
+        unless latest_version =~ /v\d+\.\d+\.\d+/
+          raise "node latest is invalid version"
+        end
+
+        Chef::Log.info "node latest version is #{latest_version}"
+
+        out = nodebrew_cmd("nodebrew ls | grep #{latest_version}")
         out.exitstatus.zero?
       end
 
