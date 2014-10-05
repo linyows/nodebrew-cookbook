@@ -4,7 +4,7 @@
 include_recipe 'build-essential'
 include_recipe 'git'
 
-case node[:platform]
+case node['platform']
 when 'redhat', 'centos', 'amazon', 'oracle'
   package 'openssl-devel'
 when 'ubuntu', 'debian'

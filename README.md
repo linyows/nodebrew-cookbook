@@ -1,7 +1,7 @@
 Nodebrew Cookbook
 =================
 
-[![Build Status](https://secure.travis-ci.org/linyows/nodebrew-cookbook.png)][travis]
+[![Build Status](https://secure.travis-ci.org/linyows/nodebrew-cookbook.svg?branch=master)][travis]
 
 Installs and manages your versions of node.js in chef with [nodebrew][nodebrew]
 
