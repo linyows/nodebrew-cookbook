@@ -27,3 +27,9 @@ attribute :path,
 attribute :package_json,
   :kind_of => [TrueClass, FalseClass],
   :default => false
+attribute :user,
+  :kind_of => String
+attribute :group,
+  :kind_of => String
+attribute :environment,
+  :kind_of => Hash
