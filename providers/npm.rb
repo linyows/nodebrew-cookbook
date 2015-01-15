@@ -13,7 +13,10 @@ action :install do
   path = new_resource.path
   json = new_resource.package_json
   node_ver = new_resource.node_version
-
+  user = new_resource.user
+  group = new_resource.group
+  environment = new_resource.environment
+  
   converge_by "Install #{new_resource}" do
     nodebrew_script "use #{node_ver} for #{pkg} installation" do
       action :nothing
@@ -33,6 +36,9 @@ action :install do
         action :nothing
         cwd path
         code 'npm install'
+        user user if user
+        group group if group
+        environment environment if environment
       end.run_action(:run)
 
     when path
@@ -40,6 +46,9 @@ action :install do
         action :nothing
         cwd path
         code "npm install #{pkg}"
+        user user if user
+        group group if group
+        environment environment if environment
       end.run_action(:run)
 
     else
@@ -57,7 +66,10 @@ action :uninstall do
   pkg = new_resource.package
   path = new_resource.path
   node_ver = new_resource.node_version
-
+  user = new_resource.user
+  group = new_resource.group
+  environment = new_resource.environment
+  
   converge_by "Uninstall #{new_resource}" do
     nodebrew_script "use #{node_ver} for #{pkg} uninstallation" do
       action :nothing
@@ -77,6 +89,9 @@ action :uninstall do
         action :nothing
         cwd path
         code "npm uninstall #{pkg}"
+        user user if user
+        group group if group
+        environment environment if environment
       end.run_action(:run)
 
     else
