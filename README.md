@@ -123,7 +123,7 @@ nodebrew '/usr/local/lib/nodebrew'
 Install nodebrew for a user
 
 ```ruby
-nodebrew do
+nodebrew '/usr/local/lib/nodebrew' do
   ref 'v0.6.3'
   user 'vagrant'
 end
