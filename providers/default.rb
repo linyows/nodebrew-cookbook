@@ -46,6 +46,7 @@ action :install do
       variables(
         :nodebrew_root => new_resource.root
       )
+      cookbook new_resource.cookbook
       notifies :create, 'ruby_block[initialize_nodebrew]', :immediately
     end
     new_resource.updated_by_last_action(r.updated_by_last_action?)
