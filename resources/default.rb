@@ -25,3 +25,6 @@ attribute :user,
 attribute :upgrade,
   :kind_of => [TrueClass, FalseClass],
   :default => false
+attribute :cookbook,
+  :kind_of => String,
+  :default => 'nodebrew'
