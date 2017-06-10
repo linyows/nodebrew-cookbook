@@ -12,6 +12,7 @@ action :run do
     nodebrew_script new_resource.name do
       action :nothing
       code "nodebrew use #{new_resource.node_version}"
+      user new_resource.user
     end.run_action(:run)
 
     Chef::Log.info "Using #{new_resource}"
