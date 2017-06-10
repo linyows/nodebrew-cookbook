@@ -24,6 +24,7 @@ action :install do
       nodebrew_script command do
         action :nothing
         code command
+        user new_resource.user
       end.run_action(:run)
 
       install_time = (Time.now - install_start) / 60.0
@@ -46,6 +47,7 @@ action :uninstall do
       nodebrew_script command do
         action :nothing
         code command
+        user new_resource.user
       end.run_action(:run)
 
       Chef::Log.info "#{new_resource} was successfully uninstall"
