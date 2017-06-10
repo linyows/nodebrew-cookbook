@@ -22,6 +22,8 @@ attribute :root,
 attribute :user,
   :kind_of => String,
   :default => 'root'
+attribute :group,
+  :kind_of => String
 attribute :upgrade,
   :kind_of => [TrueClass, FalseClass],
   :default => false
