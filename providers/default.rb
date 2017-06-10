@@ -12,6 +12,7 @@ action :install do
   converge_by "Install #{new_resource}" do
     directory ::File.dirname(src_path) do
       recursive true
+      owner new_resource.user
     end
 
     git src_path do
@@ -22,6 +23,8 @@ action :install do
       else
         action :sync
       end
+      user new_resource.user
+      group (new_resource.group || new_resource.user)
     end
 
     execute "setup_nodebrew_#{new_resource.name}" do
@@ -40,15 +43,24 @@ action :install do
       action :nothing
     end
 
-    r = template '/etc/profile.d/nodebrew.sh' do
-      source 'nodebrew.sh.erb'
-      mode '0644'
-      variables(
-        :nodebrew_root => new_resource.root
-      )
-      cookbook new_resource.cookbook
-      notifies :create, 'ruby_block[initialize_nodebrew]', :immediately
+    if new_resource.user == 'root'
+      r = template '/etc/profile.d/nodebrew.sh' do
+        source 'nodebrew.sh.erb'
+        mode '0644'
+        variables(
+          :nodebrew_root => new_resource.root
+        )
+        cookbook new_resource.cookbook
+        notifies :create, 'ruby_block[initialize_nodebrew]', :immediately
+      end
+      new_resource.updated_by_last_action(r.updated_by_last_action?)
+    else
+      r = execute 'PATH for nodebrew' do
+        command "echo \"export PATH=$(echo ~#{new_resource.user})/.nodebrew/current/bin:$PATH\" >> $(echo ~#{new_resource.user})/.bashrc"
+        user new_resource.user
+        not_if "cat $(echo ~#{new_resource.user})/.bashrc | grep -q nodebrew"
+      end
+      new_resource.updated_by_last_action(r.updated_by_last_action?)
     end
-    new_resource.updated_by_last_action(r.updated_by_last_action?)
   end
 end
