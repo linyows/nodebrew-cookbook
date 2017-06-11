@@ -17,3 +17,6 @@ attribute :version,
 attribute :binary,
   :kind_of => [TrueClass, FalseClass],
   :default => false
+attribute :user,
+  :kind_of => String,
+  :default => 'root'
