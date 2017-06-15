@@ -8,6 +8,7 @@ nodebrew node['nodebrew']['root'] do
   repository node['nodebrew']['repository']
   ref node['nodebrew']['ref']
   upgrade node['nodebrew']['upgrade']
+  user node['nodebrew']['user']
   group node['nodebrew']['group'] if node['nodebrew']['group']
 end
 
