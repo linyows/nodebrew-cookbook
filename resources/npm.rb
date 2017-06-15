@@ -30,3 +30,5 @@ attribute :package_json,
 attribute :user,
   :kind_of => String,
   :default => 'root'
+attribute :group,
+  :kind_of => String

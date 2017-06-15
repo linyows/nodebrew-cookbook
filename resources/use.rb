@@ -17,3 +17,5 @@ attribute :node_version,
   :required => true
 attribute :user,
   :kind_of => String
+attribute :group,
+  :kind_of => String

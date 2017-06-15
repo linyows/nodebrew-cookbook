@@ -31,6 +31,7 @@ action :install do
       command 'perl nodebrew setup'
       environment 'NODEBREW_ROOT' => new_resource.root
       user new_resource.user
+      group (new_resource.group || new_resource.user)
       not_if { ::File.exists?(new_resource.root) && !new_resource.upgrade }
     end
 
@@ -57,6 +58,7 @@ action :install do
       r = execute 'PATH for nodebrew' do
         command "echo \"export PATH=$(echo ~#{new_resource.user})/.nodebrew/current/bin:$PATH\" >> $(echo ~#{new_resource.user})/.bashrc"
         user new_resource.user
+        group (new_resource.group || new_resource.user)
         not_if "cat $(echo ~#{new_resource.user})/.bashrc | grep -q nodebrew"
       end
       new_resource.updated_by_last_action(r.updated_by_last_action?)

@@ -25,6 +25,7 @@ action :install do
         action :nothing
         code command
         user new_resource.user
+        group (new_resource.group || new_resource.user)
       end.run_action(:run)
 
       install_time = (Time.now - install_start) / 60.0
@@ -48,6 +49,7 @@ action :uninstall do
         action :nothing
         code command
         user new_resource.user
+        group (new_resource.group || new_resource.user)
       end.run_action(:run)
 
       Chef::Log.info "#{new_resource} was successfully uninstall"

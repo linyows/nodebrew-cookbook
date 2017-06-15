@@ -19,6 +19,7 @@ action :install do
       action :nothing
       code "nodebrew use #{new_resource.node_version}"
       user new_resource.user
+      group (new_resource.group || new_resource.user)
     end.run_action(:run) if node_ver
 
     case
@@ -35,6 +36,7 @@ action :install do
         cwd path
         code 'npm install'
         user new_resource.user
+        group (new_resource.group || new_resource.user)
       end.run_action(:run)
 
     when path
@@ -49,6 +51,7 @@ action :install do
         action :nothing
         code "npm -g install #{pkg}"
         user new_resource.user
+        group (new_resource.group || new_resource.user)
       end.run_action(:run)
     end
 
@@ -66,6 +69,7 @@ action :uninstall do
       action :nothing
       code "nodebrew use #{new_resource.node_version}"
       user new_resource.user
+      group (new_resource.group || new_resource.user)
     end.run_action(:run) if node_ver
 
     case
@@ -82,6 +86,7 @@ action :uninstall do
         cwd path
         code "npm uninstall #{pkg}"
         user new_resource.user
+        group (new_resource.group || new_resource.user)
       end.run_action(:run)
 
     else
@@ -89,6 +94,7 @@ action :uninstall do
         action :nothing
         code "npm -g uninstall #{pkg}"
         user new_resource.user
+        group (new_resource.group || new_resource.user)
       end.run_action(:run)
     end
 
