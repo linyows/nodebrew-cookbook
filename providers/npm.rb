@@ -17,6 +17,7 @@ action :install do
   converge_by "Install #{new_resource}" do
     nodebrew_script "use #{node_ver} for #{pkg} installation" do
       action :nothing
+      environment 'HOME' => ::Dir.home(new_resource.user)
       code "nodebrew use #{new_resource.node_version}"
       user new_resource.user
       group (new_resource.group || new_resource.user)
@@ -33,6 +34,7 @@ action :install do
     when json && path
       nodebrew_script "install #{pkg} from package.json_at #{path} by npm" do
         action :nothing
+        environment 'HOME' => ::Dir.home(new_resource.user)
         cwd path
         code 'npm install'
         user new_resource.user
@@ -42,6 +44,7 @@ action :install do
     when path
       nodebrew_script "install #{pkg} into #{path} by npm" do
         action :nothing
+        environment 'HOME' => ::Dir.home(new_resource.user)
         cwd path
         code "npm install #{pkg}"
       end.run_action(:run)
@@ -49,6 +52,7 @@ action :install do
     else
       nodebrew_script "install #{pkg} by npm" do
         action :nothing
+        environment 'HOME' => ::Dir.home(new_resource.user)
         code "npm -g install #{pkg}"
         user new_resource.user
         group (new_resource.group || new_resource.user)
@@ -67,6 +71,7 @@ action :uninstall do
   converge_by "Uninstall #{new_resource}" do
     nodebrew_script "use #{node_ver} for #{pkg} uninstallation" do
       action :nothing
+      environment 'HOME' => ::Dir.home(new_resource.user)
       code "nodebrew use #{new_resource.node_version}"
       user new_resource.user
       group (new_resource.group || new_resource.user)
@@ -83,6 +88,7 @@ action :uninstall do
     when path
       nodebrew_script "uninstall #{pkg} from #{path} by npm" do
         action :nothing
+        environment 'HOME' => ::Dir.home(new_resource.user)
         cwd path
         code "npm uninstall #{pkg}"
         user new_resource.user
@@ -92,6 +98,7 @@ action :uninstall do
     else
       nodebrew_script "uninstall #{pkg} by npm" do
         action :nothing
+        environment 'HOME' => ::Dir.home(new_resource.user)
         code "npm -g uninstall #{pkg}"
         user new_resource.user
         group (new_resource.group || new_resource.user)
