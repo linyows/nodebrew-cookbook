@@ -12,7 +12,6 @@ action :install do
   converge_by "Install #{new_resource}" do
     directory ::File.dirname(src_path) do
       recursive true
-      owner new_resource.user
     end
 
     git src_path do
