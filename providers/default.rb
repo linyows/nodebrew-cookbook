@@ -56,7 +56,7 @@ action :install do
       new_resource.updated_by_last_action(r.updated_by_last_action?)
     else
       r = execute 'PATH for nodebrew' do
-        command "echo \"export PATH=$(echo ~#{new_resource.user})/.nodebrew/current/bin:$PATH\" >> $(echo ~#{new_resource.user})/.bashrc"
+        command "echo \"export PATH=~/.nodebrew/current/bin:\\$PATH\" >> $(echo ~#{new_resource.user})/.bashrc"
         user new_resource.user
         group (new_resource.group || new_resource.user)
         not_if "cat $(echo ~#{new_resource.user})/.bashrc | grep -q nodebrew"
