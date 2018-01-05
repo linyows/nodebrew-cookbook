@@ -1,18 +1,8 @@
 language: ruby
-
 rvm:
-  - 2.0.0
-  - 2.1.1
-
+  - 2.5
 script:
   - bundle exec rake chef:spec
-
 notifications:
-  email:
-    on_success: change
-    on_failure: always
-  irc:
-    on_success: change
-    on_failure: always
-    channels:
-      - "irc.freenode.org#linyows"
+  slack: linyows:2oeZ2qcLnaMjbnEYodwEXKTr
+  email: false
