@@ -10,3 +10,7 @@ recipe 'nodebrew', 'Installs and configures nodebrew'
 
 %w(centos redhat fedora ubuntu debian).each { |os| supports os }
 %w(build-essential git).each { |cookbook| depends cookbook }
+
+source_url 'https://github.com/linyows/nodebrew-cookbook'
+issues_url 'https://github.com/linyows/nodebrew-cookbook/issues'
+chef_version '>= 12.9' if respond_to?(:chef_version)
