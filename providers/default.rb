@@ -50,7 +50,7 @@ action :install do
           :nodebrew_root => new_resource.root
         )
         cookbook new_resource.cookbook
-        notifies :create, 'ruby_block[initialize_nodebrew]', :immediately
+        notifies :run, 'ruby_block[initialize_nodebrew]', :immediately
       end
     else
       r = execute 'PATH for nodebrew' do
