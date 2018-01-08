@@ -22,8 +22,6 @@ attribute :group,
   :kind_of => String
 attribute :interpreter,
   :kind_of => String
-attribute :path,
-  :kind_of => Array
 attribute :returns,
   :kind_of => Array,
   :default => [0]
