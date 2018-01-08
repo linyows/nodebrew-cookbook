@@ -4,6 +4,8 @@ def whyrun_supported?
   true
 end
 
+use_inline_resources
+
 action :install do
   converge_by "Install #{new_resource}" do
     case
@@ -27,8 +29,6 @@ action :install do
 
       install_time = (Time.now - install_start) / 60.0
       Chef::Log.info "#{new_resource} build time was #{install_time} minutes"
-
-      new_resource.updated_by_last_action(true)
     end
   end
 end
@@ -50,8 +50,6 @@ action :uninstall do
       end.run_action(:run)
 
       Chef::Log.info "#{new_resource} was successfully uninstall"
-
-      new_resource.updated_by_last_action(true)
     end
   end
 end

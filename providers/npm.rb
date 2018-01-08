@@ -4,6 +4,8 @@ def whyrun_supported?
   true
 end
 
+use_inline_resources
+
 action :install do
   pkg = new_resource.package
   pkg << "@#{new_resource.version}" if new_resource.version
@@ -55,8 +57,6 @@ action :install do
         group (new_resource.group || new_resource.user)
       end.run_action(:run)
     end
-
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -101,7 +101,5 @@ action :uninstall do
         group (new_resource.group || new_resource.user)
       end.run_action(:run)
     end
-
-    new_resource.updated_by_last_action(true)
   end
 end

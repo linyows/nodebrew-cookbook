@@ -4,6 +4,8 @@ def whyrun_supported?
   true
 end
 
+use_inline_resources
+
 action :run do
   converge_by "Run #{new_resource}" do
     script new_resource.name do
@@ -22,7 +24,5 @@ action :run do
       user new_resource.user if new_resource.user
       umask new_resource.umask if new_resource.umask
     end.run_action(:run)
-
-    new_resource.updated_by_last_action(true)
   end
 end

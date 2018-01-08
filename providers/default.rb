@@ -2,6 +2,8 @@ def whyrun_supported?
   true
 end
 
+use_inline_resources
+
 action :install do
   cache_path = Chef::Config['file_cache_path']
   src_path = "#{cache_path}/nodebrew"
@@ -50,7 +52,6 @@ action :install do
         cookbook new_resource.cookbook
         notifies :create, 'ruby_block[initialize_nodebrew]', :immediately
       end
-      new_resource.updated_by_last_action(r.updated_by_last_action?)
     else
       r = execute 'PATH for nodebrew' do
         command "echo \"export PATH=~/.nodebrew/current/bin:\\$PATH\" >> $(echo ~#{new_resource.user})/.bashrc"
@@ -58,7 +59,6 @@ action :install do
         group (new_resource.group || new_resource.user)
         not_if "cat $(echo ~#{new_resource.user})/.bashrc | grep -q nodebrew"
       end
-      new_resource.updated_by_last_action(r.updated_by_last_action?)
     end
   end
 end
