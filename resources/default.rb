@@ -4,11 +4,6 @@
 actions :install
 default_action :install
 
-def initialize(*args)
-  super
-  @action = :install
-end
-
 attribute :repository,
   :kind_of => String,
   :default => 'git://github.com/hokaccha/nodebrew.git'

@@ -4,11 +4,6 @@
 actions :install, :uninstall
 default_action :install
 
-def initialize(*args)
-  super
-  @action = :install
-end
-
 attribute :version,
   :kind_of => String,
   :name_attribute => true,
