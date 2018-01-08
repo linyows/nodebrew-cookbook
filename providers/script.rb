@@ -8,16 +8,15 @@ use_inline_resources
 
 action :run do
   converge_by "Run #{new_resource}" do
-    script new_resource.name do
+    script "Run #{new_resource}" do
       action :nothing
-      interpreter 'bash'
       code add_nodebrew_path(new_resource.code)
       creates new_resource.creates if new_resource.creates
       cwd new_resource.cwd if new_resource.cwd
       environment new_resource.environment if new_resource.environment
       flags new_resource.flags if new_resource.flags
       group new_resource.group if new_resource.group
-      path new_resource.path if new_resource.path
+      interpreter new_resource.interpreter || 'bash'
       returns new_resource.returns if new_resource.returns
       timeout new_resource.timeout if new_resource.timeout
       user new_resource.user if new_resource.user
