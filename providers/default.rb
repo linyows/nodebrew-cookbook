@@ -1,6 +1,3 @@
-# Cookbook Name:: nodebrew
-# Provider:: default
-
 def whyrun_supported?
   true
 end

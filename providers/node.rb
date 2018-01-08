@@ -1,6 +1,3 @@
-# Cookbook Name:: nodebrew
-# Provider:: node
-
 include Chef::Mixin::Nodebrew
 
 def whyrun_supported?
