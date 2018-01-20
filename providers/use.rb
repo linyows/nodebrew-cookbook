@@ -4,8 +4,6 @@ def whyrun_supported?
   true
 end
 
-use_inline_resources
-
 action :run do
   converge_by "Run #{new_resource}" do
     nodebrew_script new_resource.name do

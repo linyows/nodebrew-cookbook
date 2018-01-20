@@ -4,8 +4,6 @@ def whyrun_supported?
   true
 end
 
-use_inline_resources
-
 action :install do
   pkg = new_resource.package
   pkg << "@#{new_resource.version}" if new_resource.version

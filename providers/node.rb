@@ -4,8 +4,6 @@ def whyrun_supported?
   true
 end
 
-use_inline_resources
-
 action :install do
   converge_by "Install #{new_resource}" do
     case

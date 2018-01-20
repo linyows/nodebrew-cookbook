@@ -2,11 +2,8 @@ def whyrun_supported?
   true
 end
 
-use_inline_resources
-
 action :install do
-  cache_path = Chef::Config['file_cache_path']
-  src_path = "#{cache_path}/nodebrew"
+  src_path = "#{Chef::Config[:file_cache_path]}/nodebrew"
 
   converge_by "Install #{new_resource}" do
     directory ::File.dirname(src_path) do
