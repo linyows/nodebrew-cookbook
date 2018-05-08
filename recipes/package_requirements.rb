@@ -1,7 +1,7 @@
 # Cookbook Name:: nodebrew
 # Recipe:: package requirements
 
-include_recipe 'build-essential'
+build_essential 'for node'
 include_recipe 'git'
 
 case node['platform']
