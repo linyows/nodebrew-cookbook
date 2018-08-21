@@ -12,7 +12,6 @@ attribute :ref,
   :default => 'master'
 attribute :root,
   :kind_of => String,
-  :name_attribute => true,
   :default => '$HOME/.nodebrew'
 attribute :user,
   :kind_of => String,

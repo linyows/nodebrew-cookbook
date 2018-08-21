@@ -3,8 +3,9 @@
 
 include_recipe 'nodebrew::package_requirements'
 
-nodebrew node['nodebrew']['root'] do
+nodebrew 'install' do
   action :install
+  root node['nodebrew']['root']
   repository node['nodebrew']['repository']
   ref node['nodebrew']['ref']
   upgrade node['nodebrew']['upgrade']
