@@ -106,3 +106,4 @@ Strainerfile
 Vagrantfile
 
 Gemfile
+vendor/*
