@@ -104,3 +104,5 @@ Strainerfile
 ###########
 .vagrant
 Vagrantfile
+
+Gemfile
