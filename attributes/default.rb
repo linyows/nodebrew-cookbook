@@ -1,7 +1,7 @@
 # Cookbook Name:: nodebrew
 # Attributes:: default
 
-default['nodebrew']['repository'] = 'git://github.com/hokaccha/nodebrew.git'
+default['nodebrew']['repository'] = 'https://github.com/hokaccha/nodebrew.git'
 default['nodebrew']['ref']        = 'master'
 default['nodebrew']['upgrade']    = true
 default['nodebrew']['root']       = '/usr/local/lib/nodebrew'
