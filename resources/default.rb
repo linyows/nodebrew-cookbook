@@ -6,7 +6,7 @@ default_action :install
 
 attribute :repository,
   :kind_of => String,
-  :default => 'git://github.com/hokaccha/nodebrew.git'
+  :default => 'https://github.com/hokaccha/nodebrew.git'
 attribute :ref,
   :kind_of => String,
   :default => 'master'
