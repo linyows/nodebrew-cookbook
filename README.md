@@ -79,7 +79,7 @@ Attributes
 
 Key        | Description             | Default
 ---        | -----------             | -------
-repository | nodebrew git repository | git://github.com/hokaccha/nodebrew.git
+repository | nodebrew git repository | https://github.com/hokaccha/nodebrew.git
 ref        | git ref                 | master
 upgrade    | sync                    | true
 root       | nodebrew root           | /usr/local/lib/nodebrew
@@ -106,7 +106,7 @@ install | install nodebrew to nodebrew_root | yes
 
 Attribute  | Description             | Default
 ---------  | -----------             | -------
-repository | nodebrew git repository | git://github.com/hokaccha/nodebrew.git
+repository | nodebrew git repository | https://github.com/hokaccha/nodebrew.git
 ref        | git ref                 | master
 upgrade    | sync                    | true
 root       | nodebrew root           | $HOME/.nodebrew
